@@ -1,38 +1,122 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Форма для загрузки JSON-файла через SQL</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script>
-		$(document).ready(function(){
-			$("#load-form").submit(function(event){
-				event.preventDefault(); // Отменяем стандартное поведение отправки формы
-				var fileName = $("#file-name").val(); // Получаем имя файла из поля ввода
-				$.ajax({
-					url: "get_json.php", // Путь к PHP-скрипту
-					method: "POST", // Метод передачи данных
-					dataType: "json", // Ожидаемый формат данных - JSON
-					data: {file_name: fileName}, // Параметры запроса
-					success: function(data){ // Обработчик успешного завершения запроса
-						// Выводим данные из файла на страницу
-						$("#result").html("<pre>" + JSON.stringify(data, null, 2) + "</pre>");
-					},
-					error: function(xhr, status, error){ // Обработчик ошибок
-						alert("Ошибка при загрузке файла: " + error);
-					}
-				});
-			});
-		});
-	</script>
-</head>
-<body>
-	<h1>Форма для загрузки JSON-файла через SQL</h1>
-	<form id="load-form">
-		<label for="file-name">Введите имя файла без расширения:</label>
-		<input type="text" id="file-name" name="file-name" required>
-		<input type="submit" value="Загрузить">
-	</form>
-	<div id="result"></div>
-</body>
-</html>
 
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+  <body>
+    <div class="container">
+      <form method="post" align="Left">
+      <input type="radio" name="variant" value="Items" /> Полная таблица товаров<br/>
+      <input type="radio" name="variant" value="Indexated" /> Полная таблица товаров с подстановкой значений<br/>
+      <input type="radio" name="variant" value="Keyboards" />  Клавиатуры <br/>
+      <input type="radio" name="variant" value="Mouses" /> Мышки <br/>
+      <input type="radio" name="variant" value="Users" /> Пользователи <br/>
+      <input type="radio" name="variant" value="Roles" /> Роли пользователей <br/>
+      <input type="radio" name="variant" value="Type" /> Типы устройств<br/>
+      <input type="radio" name="variant" value="Color" /> Цвета устройств <br/>
+
+      <input type="radio" name="variant" value="Coloring" /> Расцветки<br/>
+      <input type="radio" name="variant" value="Manuf" /> Производители устройств<br/>
+      <input type="radio" name="variant" value="Conn" /> Подключение устройтв <br/>
+      <input type="radio" name="variant" value="Keys" /> Количество клавиш на устройстве <br/>
+      <input type="radio" name="variant" value="Role" /> Роли пользователей <br/>
+      <input type="radio" name="variant" value="Users" /> Пользователи <br/>
+        <p align="middle">
+          <input class="button" type="submit" />
+        </p>
+  </form>
+      <p align="right">
+          <img src="/a.png">
+      </p>
+  </div>
+    
+
+  <?php
+
+    if( isset( $_POST['variant'] ) )
+    {
+        switch( $_POST['variant'] )
+        {
+          case 'Items':
+              echo 'Таблица всех товаров';
+              include('./items.php');
+              break;
+
+          case 'Coloring':
+          echo 'Индексированная таблица расцветок';
+          include('./coloring.php');
+          break;
+
+          case 'Indexated':
+          echo 'Таблица всех товаров';
+          include('./indexated.php');
+          break;
+
+          case 'Role':
+          echo 'Таблица ролей пользователей';
+          include('./roles.php');
+          break;
+
+          case 'Users':
+          echo 'Таблица пользователей';
+          include('./users.php');
+          break;
+
+            case 'Keyboards':
+            echo 'Таблица клавиатур'; 
+            include('./keyb.php');
+            break;
+
+          case 'Mouses':
+          echo 'Таблица  мышек'; 
+          include('./mouses.php');
+          break;
+
+          case 'Users':
+          echo 'Таблица пользователей';
+          include('./users.php');
+          break;
+
+          case 'Roles':
+          echo 'Таблица ролей пользователей';
+          include('./roles.php');
+          break;
+
+            case 'Type':
+                echo 'Таблица типов устройств';
+                include('./type.php');
+                break;
+
+          case 'Color':
+          echo 'Таблица цветов устройств';
+          include('./color.php');
+          break;
+
+          case 'Manuf':
+          echo 'Таблица производителей устройств';
+          include('./manuf.php');
+          break;
+
+          case 'Conn':
+          echo 'Таблица вариантов подключений устройств';
+          include('./connect.php');
+          break;
+
+          case 'Keys':
+          echo 'Таблица кол-ва клавиш на устройстве';
+          include('./key.php');
+          break;
+        }
+    }
+    else
+    {
+        echo 'Вариант не выбран😒';
+    }
+    ?>
+  </body>
+</html>
