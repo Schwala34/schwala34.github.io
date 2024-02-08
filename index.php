@@ -12,7 +12,7 @@
     <div class="container">
       <form method="post" align="Left">
       <input type="radio" name="variant" value="Items" /> Полная таблица товаров<br/>
-      <input type="radio" name="variant" value="Indexated" /> Полная таблица товаров с подстановкой значений<br/>
+      <input type="radio" name="variant" value="bruv" /> Полная таблица товаров с подстановкой значений<br/>
       <input type="radio" name="variant" value="Keyboards" />  Клавиатуры <br/>
       <input type="radio" name="variant" value="Mouses" /> Мышки <br/>
       <input type="radio" name="variant" value="Users" /> Пользователи <br/>
@@ -52,9 +52,9 @@
           include('./coloring.php');
           break;
 
-          case 'Indexated':
+          case 'bruv':
           echo 'Таблица всех товаров';
-          include('./indexated.php');
+          include('./bruv.php');
           break;
 
           case 'Role':
